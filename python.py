@@ -2,8 +2,8 @@ class itemz:
 
     def __init__(self, name, price, qty):
         self.name = name
-        self.price = price
-        self.qty = qty
+        self.price = float(price)
+        self.qty = int(qty)
         self.category = "general"
         self.env_fee = 0
 
@@ -34,7 +34,10 @@ class shoppinCart:
         # todo: fix this in the future i guess
         subtotal = 0
         for item in self.items:
-            subtotal += item.getTotal()
+            if item.category == "electronics":
+                subtotal += item.getTotal() + 5.00
+            else:
+                subtotal += item.getTotal()
         return subtotal
 
     def applyDiscounts(self, subtotal, isMember, hasCoupon):
@@ -59,7 +62,7 @@ def main():
     cart = shoppinCart()
     item1 = itemz("Apple", 1.5, 10)
     item2 = itemz("Banana", 0.5, 5)
-    item3 = itemz("Laptop", "1000", 1)
+    item3 = itemz("Laptop", 1000.0, 1)
     item3.category = "electronics"
     cart.addItem(item1)
     cart.addItem(item2)
